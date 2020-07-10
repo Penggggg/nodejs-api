@@ -1,0 +1,1 @@
+console.log( '字符转字节：', Buffer.from('abc123'))
