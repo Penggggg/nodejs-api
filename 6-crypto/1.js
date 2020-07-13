@@ -98,3 +98,34 @@ var hong_secret = hong.computeSecret(ming_keys);
 // print secret:
 console.log('Secret of Xiao Ming: ' + ming_secret.toString('hex'));
 console.log('Secret of Xiao Hong: ' + hong_secret.toString('hex'));
+
+
+console.log(`
+
+================= RSA 非对称加密  =================
+`);
+
+const fs = require('fs');
+function loadKey(file) {
+    return fs.readFileSync(file, 'utf8');
+}
+
+let
+    prvKey = loadKey('./rsa-prv.pem'),
+    pubKey = loadKey('./rsa-pub.pem'),
+    message = 'Hello, world!';
+
+    let enc_by_prv = crypto.privateEncrypt(prvKey, Buffer.from(message, 'utf8'));
+    console.log('私加：' + enc_by_prv.toString('hex'));
+    
+    
+    let dec_by_pub = crypto.publicDecrypt(pubKey, enc_by_prv);
+    console.log('公解： ' + dec_by_pub.toString('utf8'));
+
+    // 使用公钥加密:
+let enc_by_pub = crypto.publicEncrypt(pubKey, Buffer.from(message, 'utf8'));
+console.log('公加： ' + enc_by_pub.toString('hex'));
+
+// 使用私钥解密:
+let dec_by_prv = crypto.privateDecrypt(prvKey, enc_by_pub);
+console.log('私改：', dec_by_prv.toString('utf8'));
