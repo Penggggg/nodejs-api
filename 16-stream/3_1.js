@@ -6,10 +6,10 @@
  */
 
 const fs = require('fs');
-const Stream = require('stream');
 
 /**
- * 文件输出
+ * 实际上，“流”会逐次调用fs.read，将文件中的内容分批取出
+ * 每当用掉一点水，水管便会从池子中再取出一点。 无论水池有多大，都只存储了与水管容积等量的水。
  */
 fs.createReadStream('./0.txt')
     .pipe( process.stdout );

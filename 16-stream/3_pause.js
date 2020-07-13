@@ -1,5 +1,10 @@
-/** 
- * 暂停模式
+/**
+ * 当readable.pause( )，进入暂停模式时
+ * 需要下游显示调用read( )，促使水管的下方流输出数据
+ * 而流，通过_read()中的push方法，将数据传给水管的上方
+ * 
+ * 
+ * 当水管中的数据足够多时，调用read()不会引起_read()的调用
  */
 
 const Readable = require('stream').Readable
@@ -16,13 +21,13 @@ readable._read = function () {
   }
 }
 
-// 进入暂停模式，
-// https://tech.meituan.com/2016/07/15/stream-internals.html
+// 进入暂停模式
 readable.pause()
 readable.on('data', data => process.stdout.write('\ndata: ' + data))
 
 var data = readable.read()
-// 为了消耗流，需要显示调用read()方法
+
+// 开关
 while (data !== null) {
   data = readable.read()
 }
