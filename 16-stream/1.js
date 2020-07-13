@@ -11,5 +11,5 @@ const Stream = require('stream');
 /**
  * 文件输出
  */
-fs.createReadStream('./1.txt')
+fs.createReadStream('./0.txt')
     .pipe( process.stdout );
