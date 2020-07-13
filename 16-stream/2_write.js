@@ -16,4 +16,4 @@ writable.write('b' + '\n')
 writable.write('c' + '\n')
 
 // 再无数据写入流时，需要调用`end`方法
-// writable.end()
+writable.end()

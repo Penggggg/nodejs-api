@@ -14,8 +14,6 @@ duplex._read = function () {
 
 // 可写端底层写逻辑
 duplex._write = function (buf, enc, next) {
-  // a, b
-  process.stdout.write('_write ' + buf.toString() + '\n')
   next()
 }
 

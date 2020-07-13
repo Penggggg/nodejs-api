@@ -14,6 +14,7 @@ class SomeReadable extends Readable {
     // 调用push(data)将数据放入可读流中供下游消耗
     _read( ) {
         const { done, value } = this.iterator.next( );
+        // push就已经进去管道了
         // 必须调用push(null)来结束可读流
         this.push( done ? null : value )
     }
